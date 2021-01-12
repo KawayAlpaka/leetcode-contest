@@ -85,6 +85,7 @@ var packU = function(n, from,to) {
         g[from[i]][--p[from[i]]] = to[i];
         g[to[i]][--p[to[i]]] = from[i];
     }
+    console.log("g：",g);
     return g;
 }
 
