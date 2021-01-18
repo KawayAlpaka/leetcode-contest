@@ -1,17 +1,27 @@
 /**
  * @param {number[][]} matrix
  * @return {number}
- * 未完成
  */
 var largestSubmatrix = function(matrix) {
+  // debugger;
   const rowLen = matrix.length;
   const colLen = matrix[0].length;
   for(let j=0;j<colLen;j++){
-    for(let i=0;i<rowLen;i++){
-      matrix[i][j]
+    for(let i=1;i<rowLen;i++){
+      if(matrix[i][j] == 1){
+        matrix[i][j] += matrix[i-1][j]
+      }
     }
   }
-
+  let res = 0;
+  for(let i=0;i<rowLen;i++){
+    matrix[i].sort((a,b)=>b-a);
+    for(let j=0;j<colLen;j++){
+      let height = matrix[i][j];
+      res = Math.max(res,height*(j+1));
+    }
+  }
+  return res;
   // const rowLen = matrix.length;
   // const colLen = matrix[0].length;
   // const rowCounts = [];
@@ -64,15 +74,18 @@ var testCases = [
   {
     matrix :[[0,0,1],[1,1,1],[1,0,1]],expect:4,
   },
-  // {
-  //   matrix :[[1,0,1,0,1]],expect:3,
-  // },
-  // {
-  //   matrix :[[1,1,0],[1,0,1]],expect:2,
-  // },
-  // {
-  //   matrix :[[0,0],[0,0]],expect:0,
-  // },
+  {
+    matrix :[[1,0,1,0,1]],expect:3,
+  },
+  {
+    matrix :[[1,1,0],[1,0,1]],expect:2,
+  },
+  {
+    matrix :[[0,0],[0,0]],expect:0,
+  },
+  {
+    matrix: [(new Array(100000)).fill(1)],expect:100000,
+  },
 ];
 
 var runTest = function(cases){
