@@ -95,6 +95,9 @@ var testCases = [
     nums :[],target:8,type:"(",expect:-1,
   },
   {
+    nums :[3,5,8,10],target:15,type:"(",expect:3,
+  },
+  {
     nums :[5,7,7,8,8,10],target:8,type:")",expect:5,
   },
   {
@@ -105,6 +108,9 @@ var testCases = [
   },
   {
     nums :[],target:8,type:")",expect:-1,
+  },
+  {
+    nums :[3,5,8,10],target:15,type:")",expect:-1,
   },
 ];
 
