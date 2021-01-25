@@ -45,49 +45,65 @@ var minCharacters = function(a, b) {
     }
   }
   var letters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
-  console.log(letters.length);
-  console.log(map1);
-  console.log(map2);
+  // console.log(letters.length);
+  // console.log(map1);
+  // console.log(map2);
+
+  var sum1 = 0;
+  var sum2 = 0;
+  var ans = len2;
+  for(let i=0;i<25;i++){
+    let c1_count = map1[letters[i]] || 0;
+    let c2_count = map2[letters[i]] || 0;
+    sum1 += c1_count;
+    sum2 += c2_count;
+    // console.log(letters[i],sum1,sum2);
+    ans = Math.min(ans,sum1 + len2 - sum2,sum2 + len1 - sum1,len1 +len2 - c1_count - c2_count);
+  }
+  let c1_count = map1[letters[25]] || 0;
+  let c2_count = map2[letters[25]] || 0;
+  ans = Math.min(ans,len1 +len2 - c1_count - c2_count);
+  return ans;
   // console.log(max_val_1);
   // console.log(max_val_2);
   // console.log(min_val_1);
   // console.log(min_val_2);
-  var sortfn = (a,b)=>{
-    if(a>b){
-      return 1;
-    }else{
-      return -1;
-    }
-  };
-  var keys1 = Object.keys(map1).sort(sortfn);
-  var keys2 = Object.keys(map2).sort(sortfn);
-  console.log(keys1);
-  console.log(keys2);
-  var r1 = 0;
-  var r2 = 0;
-  let left1 = 0;
-  let right2 = keys2.length-1;
-  let more1 = 0;
-  let more2 = 0;
-  debugger;
-  while(left1<keys1.length && right2>=0){
-    if(keys1[left1] > keys2[right2]){
-      more1 += map1[keys1[left1]];
-      more2 += map2[keys2[right2]];
-      if(more1 > more2){
-        r1 += more2;
-        more1 += more1 - more2;
-        right2--;
-      }else{
-        r2 += more1;
-        more2 += more2 -more1;
-        left1++;
-      }
-    }else{
-      break;
-    }
-  }
-  console.log(r1,r2);
+  // var sortfn = (a,b)=>{
+  //   if(a>b){
+  //     return 1;
+  //   }else{
+  //     return -1;
+  //   }
+  // };
+  // var keys1 = Object.keys(map1).sort(sortfn);
+  // var keys2 = Object.keys(map2).sort(sortfn);
+  // console.log(keys1);
+  // console.log(keys2);
+  // var r1 = 0;
+  // var r2 = 0;
+  // let left1 = 0;
+  // let right2 = keys2.length-1;
+  // let more1 = 0;
+  // let more2 = 0;
+  // debugger;
+  // while(left1<keys1.length && right2>=0){
+  //   if(keys1[left1] > keys2[right2]){
+  //     more1 += map1[keys1[left1]];
+  //     more2 += map2[keys2[right2]];
+  //     if(more1 > more2){
+  //       r1 += more2;
+  //       more1 += more1 - more2;
+  //       right2--;
+  //     }else{
+  //       r2 += more1;
+  //       more2 += more2 -more1;
+  //       left1++;
+  //     }
+  //   }else{
+  //     break;
+  //   }
+  // }
+  // console.log(r1,r2);
 
   // for(let i =0;i<keys1.length;i++ ){
   //   for(let j =keys2.length-1;j>=0;j-- ){
@@ -100,7 +116,7 @@ var minCharacters = function(a, b) {
   //     }
   //   }
   // }
-  console.log(r1,r2);
+  // console.log(r1,r2);
 
   // var r1 = 0;
   // var more1 = 0;
@@ -149,7 +165,7 @@ var minCharacters = function(a, b) {
   // }
   // console.log("r2:",r2);
 
-  return 0;
+  // return 0;
 };
 
 
@@ -158,13 +174,23 @@ var testCases = [
     a :"aba",b:"caa",expect:2,
   },
   {
-    a :"aba",b:"cca",expect:2,
+    a :"aba",b:"cca",expect:1,
   },
   {
     a :"dabadd",b:"cda",expect:3,
   },
   {
     a :"dabaddd",b:"cda",expect:3,
+  },
+  {
+    a :"daddddd",b:"ddd",expect:1,
+  },
+  {
+  
+    a :"azzzz",b:"bzzzz",expect:2,
+  },
+  {
+    a :"a",b:"abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz",expect:2,
   },
 
 ];
